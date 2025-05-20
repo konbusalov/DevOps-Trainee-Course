@@ -1,0 +1,10 @@
+1 -rw-r--r--  1 root root   84219 мая 18 16:26 ld.so.cache
+2 -rw-r--r--  1 root root   72029 сак 21  2022 mime.types
+3 -rw-r--r--  1 root root   45077 мая 18 16:26 mailcap
+4 -rw-r--r--  1 root root   29219 чэр 28  2022 brltty.conf
+5 -rw-r--r--  1 root root   12813 сак 28  2021 services
+6 drwxr-xr-x  2 root root   12288 мая 15 03:02 alternatives
+7 -rw-r--r--  1 root root   11204 лют  9  2022 nanorc
+8 -rw-r--r--  1 root root   10734 ліс 11  2021 login.defs
+9 -rw-r--r--  1 root root   10593 кра  1  2022 sensors3.conf
+10 -rw-r--r--  1 root root    9454 сак  3 06:11 locale.gen

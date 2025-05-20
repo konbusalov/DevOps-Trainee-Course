@@ -1,0 +1,9 @@
+df -h | awk '{print $1,$5,$6}' | column -t >> disc_info.txt - prints df command with only the Filesystem, Use% and Mounted on columns. 
+
+ls -l /etc/ | sort -k5nr | awk 'NR==1, NR==10 {print NR,$0}' >> disc_info.txt - prints top 10 largest files in /etc.
+
+cat some_file.txt | sed -n '/\/A$/p' - finds lines ending with /A in some_file.txt.
+
+cat /etc/passwd | awk '/bin\/bash$/ {print NR, $0}' >> has_bash.txt - prints all lines that use /bin/bash and sends the output to has_bash.txt.
+
+sed -i 's/zsh$/bash/' ~/Desktop/DevOps/DevOps-Trainee-Course/Module-1/Task_1.2/passwd - substitutes all lines that use /bin/zsh with /bin/bash in passwd.
