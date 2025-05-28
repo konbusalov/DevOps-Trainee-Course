@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs uptime to a file every 15 seconds
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/local/bin/uptime.bash
+

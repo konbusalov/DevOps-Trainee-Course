@@ -1,0 +1,15 @@
+sudo nano /etc/systemd/system/uptime.service
+
+sudo nano /usr/local/bin/uptime.bash    
+ 
+stress --cpu 8 --timeout 50s
+
+crontab -e  
+
+*/10 * * * * systemctl status uptime >> home/kon/uptime_status.log
+
+ping 8.8.8.8 > /dev/null &
+jobs    
+fg %1 
+ps -a 
+kill -9 36691 

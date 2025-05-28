@@ -1,0 +1,19 @@
+#!/bin/bash
+
+UPTIME_FILE="/home/kon/uptime.txt"
+OVERLOAD_FILE="/home/kon/overload.txt"
+CLEANUP_FILE="/home/kon/cleanup.txt"
+
+while true; do
+        uptime >> "$UPTIME_FILE"
+        uptime | awk '{if($8 + 0 >= 1) print $0}' >> "$OVERLOAD_FILE" 
+
+	file_size=$(stat -c %s "$OVERLOAD_FILE")
+	if (($file_size > 51200)); then
+		> "$OVERLOAD_FILE"
+		echo "[$(date +'%d-%m-%Y %T')] Cleared overload file" >> "$CLEANUP_FILE"
+	fi
+
+	sleep 15 
+done
+
