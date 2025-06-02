@@ -1,0 +1,40 @@
+ln -s /home/kon/test /tmp/soft_link - created a symlink pointing to the test directory
+cp -rL /tmp/soft_link/. /tmp/ - copied the contents of /home/kon/test into /tmp/ using the symlink
+ln /home/kon/test/test_123.txt /tmp/hard_link - created a hardlink pointing to test_123.txt
+df -i - listed inodes
+
+lsblk - checked that sdb was created
+fdisk /dev/sdb - created a new partition on sdb taking up 2GB
+mkfs.xfs /dev/sdb1 - created an xfs filesystem on sdb1
+mount /dev/sdb1 /mnt - mounted sdb1 to /mnt
+df -hT - checked that sdb1 has appeared in the list of available drives
+touch /mnt/file.txt - created a file in the new filesystem
+umount /mnt - unmounted the partition to prepare for resizing
+fdisk /dev/sdb - deleted the partition, created a new one taking up 3GB
+xfs_repair -n /dev/sdb1 - checked for errors in the filesystem
+mount /dev/sdb1 /mnt - remounted sdb1 to /mnt
+xfs_growfs /mnt - resized the file system to take up the new available space
+ll mnt/ - checked for the file that was created before the resizing. Noticed that it is still there
+df -hT - checked that sdb1 has reapeared in the list of available drives with updated data.
+
+fdisc /dev/sdb - created partition sdb1
+pvcreate /dev/sdb1 - created a physical volume in lvm for sdb1
+vgcreate group1 /dev/sdb1 - created a group containing pv sdb1
+lvcreate -l 50%FREE -n vol1 group1 - created first logic volume taking up 50% of group1
+lvcreate -l 100%FREE -n vol2 group1 - created second logic volume taking up 50% of group1
+mkfs.xfs /dev/group1/vol1 - created an xfs filesytem for vol1
+mkfs.xfs /dev/group1/vol2 - created an xfs filesytem for vol2
+mkdir /mount1 - created mount point
+mkdir /mount2 - created mount point
+mount /dev/group1/vol1 /mount1 - mounted vol1
+mount /dev/group1/vol2 /mount2 - mounted vol2
+df -h - checked df for changes
+fdisk /dev/sdc - created partition sdc1
+pvcreate /dev/sdc1 - created a physical volume in lvm for sdc1
+vgextend group1 /dev/sdc1 - extended group one to cover sdc1 aswell
+lvextend -l 100%FREE group1/vol1 - extended vol1 to cover all free space
+xfs_growfs /dev/group1/vol1 - extended xfs filesystem to cover extended vol1
+df -h 
+pvs
+vgs
+lvs
