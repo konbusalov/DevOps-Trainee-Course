@@ -1,8 +1,12 @@
+SYMLINKS
+_________________________________________________________________________________________
 ln -s /home/kon/test /tmp/soft_link - created a symlink pointing to the test directory
 cp -rL /tmp/soft_link/. /tmp/ - copied the contents of /home/kon/test into /tmp/ using the symlink
 ln /home/kon/test/test_123.txt /tmp/hard_link - created a hardlink pointing to test_123.txt
 df -i - listed inodes
 
+DISC PARTITIONING
+_________________________________________________________________________________________
 lsblk - checked that sdb was created
 fdisk /dev/sdb - created a new partition on sdb taking up 2GB
 mkfs.xfs /dev/sdb1 - created an xfs filesystem on sdb1
@@ -17,6 +21,8 @@ xfs_growfs /mnt - resized the file system to take up the new available space
 ll mnt/ - checked for the file that was created before the resizing. Noticed that it is still there
 df -hT - checked that sdb1 has reapeared in the list of available drives with updated data.
 
+LVM
+__________________________________________________________________________________________
 fdisc /dev/sdb - created partition sdb1
 pvcreate /dev/sdb1 - created a physical volume in lvm for sdb1
 vgcreate group1 /dev/sdb1 - created a group containing pv sdb1
