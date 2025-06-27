@@ -1,2 +1,4 @@
 [submodule "Task_2.1"]
 	url = https://github.com/konbusalov/devops-task1.
+[submodule "Module-2/Task_2.1"]
+	url = https://github.com/konbusalov/devops-task1.
