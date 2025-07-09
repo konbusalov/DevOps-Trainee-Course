@@ -1,0 +1,29 @@
+ubuntu@ip-10-0-1-16:~$ curl -L --header "PRIVATE-TOKEN: 9JaRN4RW3sRj_RsX98AR" -o nginx.conf "https://devops-gitlab.inno.ws/api/v4/projects/devops-board%2Fdocker/repository/files/dkr-nginx-conf-1%2Fnginx.conf/raw?ref=main"
+
+ubuntu@ip-10-0-1-16:~$ docker run -d --mount type=bind,src=/home/ubuntu/nginx.conf,dst=/etc/nginx/nginx.conf -p 127.0.0.1:8890:80 --name inno-dkr-03 nginx:stable
+
+ubuntu@ip-10-0-1-16:~$ curl http://127.0.0.1:8890
+Welcome to the training program Innowise: Docker!
+
+ubuntu@ip-10-0-1-16:~$ curl -L --header "PRIVATE-TOKEN: 9JaRN4RW3sRj_RsX98AR" -o nginx-2.conf "https://devops-gitlab.inno.ws/api/v4/projects/devops-board%2Fdocker/repository/files/dkr-nginx-conf-2%2Fnginx.conf/raw?ref=main"
+
+ubuntu@ip-10-0-1-16:~$ cp nginx-2.conf nginx.conf
+
+ubuntu@ip-10-0-1-16:~$ docker exec -it inno-dkr-03 nginx -s reload
+
+ubuntu@ip-10-0-1-16:~$ curl http://127.0.0.1:8890
+Welcome to the training program Innowise: Docker! Again!
+
+ubuntu@ip-10-0-1-16:~$ echo "set backupcopy=yes" >> ~/.vimrc
+
+ubuntu@ip-10-0-1-16:~$ vim nginx.conf 
+
+ubuntu@ip-10-0-1-16:~$ docker exec -it inno-dkr-03 nginx -s reload
+
+ubuntu@ip-10-0-1-16:~$ curl http://127.0.0.1:8890
+Welcome to the training program Innowise: Docker! Again! And Again, using vim!!!!
+
+ubuntu@ip-10-0-1-16:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS         PORTS                    NAMES
+07a44543ce40   nginx:stable   "/docker-entrypoint.…"   About an hour ago   Up 4 minutes   127.0.0.1:8890->80/tcp   inno-dkr-03
+
