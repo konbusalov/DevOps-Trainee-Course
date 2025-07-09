@@ -1,0 +1,14 @@
+ubuntu@ip-10-0-1-16:~$ docker run -d --mount type=bind,src=/home/ubuntu/nginx.conf,dst=/etc/nginx/nginx.conf -p 127.0.0.1:8889:80 --name inno-dkr-02 nginx:stable
+
+ubuntu@ip-10-0-1-16:~$ curl http://127.0.0.1:8889
+Welcome to the training program Innowise
+
+ubuntu@ip-10-0-1-16:~$ docker ps 
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+c41123344736   nginx:stable   "/docker-entrypoint.…"   23 minutes ago   Up 23 minutes   127.0.0.1:8889->80/tcp   inno-dkr-02
+
+ubuntu@ip-10-0-1-16:~$ docker exec -it inno-dkr-02 md5sum /etc/nginx/nginx.conf
+8a7b657f4af2d2c41a2c702843559418  /etc/nginx/nginx.conf
+ubuntu@ip-10-0-1-16:~$ md5sum nginx.conf 
+8a7b657f4af2d2c41a2c702843559418  nginx.conf
+
