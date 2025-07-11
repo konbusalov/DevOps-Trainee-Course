@@ -1,0 +1,42 @@
+ubuntu@ip-10-0-1-16:~$ docker run -d --name inno-dkr-05-run-$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10) nginx:stable
+bd96cb6539644deeae01bce49dfd35ec25e64bcfb14c9bef237eefbf49ba8145
+
+ubuntu@ip-10-0-1-16:~$ docker run -d --name inno-dkr-05-run-$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10) nginx:stable
+17a1c30c70cd71fa3ce494f5ae4b77a0903ef66037e627ae6797a09b294b6c31
+
+ubuntu@ip-10-0-1-16:~$ docker run -d --name inno-dkr-05-stop nginx:stable
+28a8753e8b01fb69e38cd60481c2a83823f2a218370f8b35ff0805720fc2fa68
+
+ubuntu@ip-10-0-1-16:~$ docker ps | tee /home/ubuntu/ps.txt
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS     NAMES
+28a8753e8b01   nginx:stable   "/docker-entrypoint.…"   8 minutes ago   Up 8 minutes   80/tcp    inno-dkr-05-stop
+17a1c30c70cd   nginx:stable   "/docker-entrypoint.…"   9 minutes ago   Up 9 minutes   80/tcp    inno-dkr-05-run-93876a41d2
+bd96cb653964   nginx:stable   "/docker-entrypoint.…"   9 minutes ago   Up 9 minutes   80/tcp    inno-dkr-05-run-1d170514b7
+
+ubuntu@ip-10-0-1-16:~$ docker stop inno-dkr-05-stop
+inno-dkr-05-stop
+
+ubuntu@ip-10-0-1-16:~$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS                      PORTS     NAMES
+28a8753e8b01   nginx:stable   "/docker-entrypoint.…"   9 minutes ago       Exited (0) 18 seconds ago             inno-dkr-05-stop
+17a1c30c70cd   nginx:stable   "/docker-entrypoint.…"   10 minutes ago      Up 10 minutes               80/tcp    inno-dkr-05-run-93876a41d2
+bd96cb653964   nginx:stable   "/docker-entrypoint.…"   10 minutes ago      Up 10 minutes               80/tcp    inno-dkr-05-run-1d170514b7
+a8f6855ebd71   nginx:stable   "/docker-entrypoint.…"   About an hour ago   Exited (0) 12 minutes ago             inno-dkr-04
+
+ubuntu@ip-10-0-1-16:~$ docker rm --force $(docker ps -q)
+8ce871357f9e
+6641646baf48
+
+ubuntu@ip-10-0-1-16:~$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS                      PORTS     NAMES
+28a8753e8b01   nginx:stable   "/docker-entrypoint.…"   21 minutes ago      Exited (0) 11 minutes ago             inno-dkr-05-stop
+a8f6855ebd71   nginx:stable   "/docker-entrypoint.…"   About an hour ago   Exited (0) 24 minutes ago             inno-dkr-04
+
+ubuntu@ip-10-0-1-16:~$ docker rm $(docker ps -aq)
+28a8753e8b01
+a8f6855ebd71
+
+ubuntu@ip-10-0-1-16:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+
