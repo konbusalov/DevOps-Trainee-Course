@@ -1,0 +1,39 @@
+docker run -d -p 127.0.0.1:8892:80 --name inno-dkr-06-local --log-driver local --log-opt max-size=10mb nginx:stable
+
+curl --silent http://127.0.0.1:8892 > /dev/null
+
+root@ip-10-0-1-16:~# tail /var/lib/docker/containers/c68399aa*/local-logs/container.log 
+stdout���޼�Ψ�A/docker-entrypoint.sh: Configuration complete; ready for start upUT
+stderr���伙Ψ�@2025/07/11 14:29:37 [notice] 1#1: using the "epoll" event methodTB
+stderr���伙Ψ�.2025/07/11 14:29:37 [notice] 1#1: nginx/1.28.0B]
+stderr���伙Ψ�I2025/07/11 14:29:37 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) ]N
+stderr���伙Ψ�:2025/07/11 14:29:37 [notice] 1#1: OS: Linux 6.8.0-1031-awsN_
+stderr���伙Ψ�K2025/07/11 14:29:37 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576_L
+stderr���弙Ψ�82025/07/11 14:29:37 [notice] 1#1: start worker processesLM
+stderrͣ�漙Ψ�92025/07/11 14:29:37 [notice] 1#1: start worker process 29MM
+stderr���漙Ψ�92025/07/11 14:29:37 [notice] 1#1: start worker process 30Mn
+stdout����њΨ�Z172.17.0.1 - - [11/Jul/2025:14:30:17 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.81.0" "-"nroot@ip-10-0-1-16:~# 
+
+ubuntu@ip-10-0-1-16:/etc/docker$ sudo nano /etc/docker/daemon.json
+
+ubuntu@ip-10-0-1-16:~$ sudo systemctl restart docker
+
+ubuntu@ip-10-0-1-16:~$ docker run -d -p 127.0.0.1:8893:80 --name inno-dkr-06-global nginx:stable
+39ba8110a3349b0d9e90132af15555f744bcf9ae73b723db7ea5cb4fa966fb44
+
+ubuntu@ip-10-0-1-16:~$ docker ps 
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+39ba8110a334   nginx:stable   "/docker-entrypoint.…"   35 seconds ago   Up 35 seconds   127.0.0.1:8893->80/tcp   inno-dkr-06-global
+
+root@ip-10-0-1-16:/home/ubuntu# tail /var/lib/docker/containers/39ba8110a334*/local-logs/container.log 
+stdout��┮�Ψ�A/docker-entrypoint.sh: Configuration complete; ready for start upUT
+stderr�޻���Ψ�@2025/07/11 14:54:45 [notice] 1#1: using the "epoll" event methodTB
+stderr������Ψ�.2025/07/11 14:54:45 [notice] 1#1: nginx/1.28.0B]
+stderr�ٓ���Ψ�I2025/07/11 14:54:45 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) ]N
+stderr�ꓝ��Ψ�:2025/07/11 14:54:45 [notice] 1#1: OS: Linux 6.8.0-1031-awsN_
+stderr������Ψ�K2025/07/11 14:54:45 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576_L
+stderr��ϝ��Ψ�82025/07/11 14:54:45 [notice] 1#1: start worker processesLM
+stderr�ϗ���Ψ�92025/07/11 14:54:45 [notice] 1#1: start worker process 29MM
+stderr������Ψ�92025/07/11 14:54:45 [notice] 1#1: start worker process 30Mn
+stdout���Ö�Ψ�Z172.17.0.1 - - [11/Jul/2025:14:55:48 +0000] "GET / HTTP/1.1" 200 615 "-" "curl/7.81.0" "-"nroot@ip-10-0-1-16:/home/
+
