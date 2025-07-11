@@ -1,0 +1,23 @@
+ubuntu@ip-10-0-1-16:~$ docker volume create my-vol
+my-vol
+
+ubuntu@ip-10-0-1-16:~$ docker run -d -p 127.0.0.1:8891:80 --name inno-dkr-04 --mount type=bind,src=./nginx.conf,dst=/etc/nginx/nginx.conf --mount type=volume,src=my-vol,dst=/var/log/nginx/external nginx:stable
+a8f6855ebd710fa0c24fcc06643a7ae7007345f883542040c619906fe23edf1b
+
+ubuntu@ip-10-0-1-16:~$ curl http://127.0.0.1:8891
+Welcome to the training program Innowise: Docker!
+
+ubuntu@ip-10-0-1-16:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                    NAMES
+a8f6855ebd71   nginx:stable   "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   127.0.0.1:8891->80/tcp   inno-dkr-04
+
+ubuntu@ip-10-0-1-16:~$ docker volume ls
+DRIVER    VOLUME NAME
+local     my-vol
+
+ubuntu@ip-10-0-1-16:~$ sudo ls -la /var/lib/docker/volumes/my-vol/_data
+total 12
+drwxr-xr-x 2 root root 4096 Jul 11 11:17 .
+drwx-----x 3 root root 4096 Jul 11 11:07 ..
+-rw-r--r-- 1 root root   90 Jul 11 11:20 access.log
+-rw-r--r-- 1 root root    0 Jul 11 11:17 error.log
