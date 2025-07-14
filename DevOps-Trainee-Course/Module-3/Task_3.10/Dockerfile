@@ -1,0 +1,14 @@
+ARG NGINX_VERSION
+
+FROM nginx:$NGINX_VERSION
+
+ARG NGINX_VERSION
+
+ENV NGINX_VERSION $NGINX_VERSION
+
+ARG ARG_FILE
+
+RUN mkdir /opt/$ARG_FILE
+
+RUN mkdir -p /var/log/nginx/external
+
