@@ -1,0 +1,28 @@
+ubuntu@ip-10-0-1-16:~$ docker pull nginx:stable-alpine
+stable-alpine: Pulling from library/nginx
+f18232174bc9: Pull complete 
+dde65f7af9d6: Pull complete 
+532a23145349: Pull complete 
+bbdf43ac95df: Pull complete 
+c544760e6514: Pull complete 
+3cc2eb67bce9: Pull complete 
+19f9a172b25c: Pull complete 
+e57f9eaa9ba5: Pull complete 
+Digest: sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+Status: Downloaded newer image for nginx:stable-alpine
+docker.io/library/nginx:stable-alpine
+
+ubuntu@ip-10-0-1-16:~$ docker image tag nginx:stable-alpine nginx:inno-dkr-07
+
+ubuntu@ip-10-0-1-16:~$ docker images
+REPOSITORY    TAG             IMAGE ID       CREATED        SIZE
+nginx         stable          f6422896ca84   2 months ago   192MB
+nginx         inno-dkr-07     936a1208f403   2 months ago   48.2MB
+nginx         stable-alpine   936a1208f403   2 months ago   48.2MB
+hello-world   latest          74cc54e27dc4   5 months ago   10.1kB
+ubuntu@ip-10-0-1-16:~$ docker run -d nginx:inno-dkr-07
+c735d7dff1dc5a11f93b56c6f6d44b4c783cc7c30daf7dcdf5bed5d98ebefd99
+
+ubuntu@ip-10-0-1-16:~$ docker ps
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS          PORTS     NAMES
+c735d7dff1dc   nginx:inno-dkr-07   "/docker-entrypoint.…"   14 seconds ago   Up 14 seconds   80/tcp    gracious_meninsky
