@@ -1,0 +1,187 @@
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker build -t inno-dkr-11:default .
+[+] Building 20.0s (14/14) FINISHED                            docker:default
+ => [internal] load build definition from Dockerfile                     0.0s
+ => => transferring dockerfile: 723B                                     0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:20.04          1.5s
+ => [internal] load .dockerignore                                        0.0s
+ => => transferring context: 2B                                          0.0s
+ => [1/9] FROM docker.io/library/ubuntu:20.04@sha256:8feb4d8ca5354def3d  1.5s
+ => => resolve docker.io/library/ubuntu:20.04@sha256:8feb4d8ca5354def3d  0.0s
+ => => sha256:8feb4d8ca5354def3d8fce243717141ce31e2c428 6.69kB / 6.69kB  0.0s
+ => => sha256:c664f8f86ed5a386b0a340d981b8f81714e21a8b9c73f 424B / 424B  0.0s
+ => => sha256:b7bab04fd9aa0c771e5720bf0cc7cbf993fd69466 2.30kB / 2.30kB  0.0s
+ => => sha256:13b7e930469f6d3575a320709035c6acf6f5485 27.51MB / 27.51MB  0.4s
+ => => extracting sha256:13b7e930469f6d3575a320709035c6acf6f5485a76abcf  1.0s
+ => [internal] load build context                                        0.1s
+ => => transferring context: 10.49MB                                     0.1s
+ => [2/9] RUN groupadd --gid 2000 user && useradd --uid 2000 --gid 2000  0.6s
+ => [3/9] RUN ls -lah /var/lib/apt/lists/                                0.2s
+ => [4/9] RUN apt-get update -y && apt-get install nginx -y             14.1s
+ => [5/9] RUN ls -lah /var/lib/apt/lists/                                0.2s 
+ => [6/9] RUN rm -rf /var/lib/apt/lists/*                                0.3s 
+ => [7/9] RUN ls -lah /var/lib/apt/lists/                                0.2s 
+ => [8/9] COPY testfile .                                                0.1s 
+ => [9/9] RUN chown user:user testfile                                   0.2s
+ => exporting to image                                                   0.9s
+ => => exporting layers                                                  0.9s
+ => => writing image sha256:97250d0a758a629dc6f3a5d26813865d92f47b50399  0.0s
+ => => naming to docker.io/library/inno-dkr-11:default                   0.0s
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker inspect inno-dkr-11:default
+[
+    {
+        "Id": "sha256:97250d0a758a629dc6f3a5d26813865d92f47b50399740321b1743a44028352e",
+        "RepoTags": [
+            "inno-dkr-11:default"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2025-07-15T09:13:04.814845187Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 212093425,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/nuei3v1qlnwumpv04nw72i1kc/diff:/var/lib/docker/overlay2/mgqvmomx2ridyiojtr57q775j/diff:/var/lib/docker/overlay2/yo1gmnbfhkhj10r4dwalciv4m/diff:/var/lib/docker/overlay2/aptat42516g24losmyki677wk/diff:/var/lib/docker/overlay2/490ixr3kq9poly53ecnx2agyq/diff:/var/lib/docker/overlay2/vd2f9434fpc7mvsy9vx1d9x0y/diff:/var/lib/docker/overlay2/9uwaayeytayuabhzj4yua6iy9/diff:/var/lib/docker/overlay2/d75f7fcd167a27578562fb04f36317d1c008e0d888b59a225b57089e280a2395/diff",
+                "MergedDir": "/var/lib/docker/overlay2/vgmz25jhq8imye4k0ht4si3p7/merged",
+                "UpperDir": "/var/lib/docker/overlay2/vgmz25jhq8imye4k0ht4si3p7/diff",
+                "WorkDir": "/var/lib/docker/overlay2/vgmz25jhq8imye4k0ht4si3p7/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:470b66ea5123c93b0d5606e4213bf9e47d3d426b640d32472e4ac213186c4bb6",
+                "sha256:83886e561b96b26f8cca5e6a8343bfd97b484caa50b4a1288882f86224a95512",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:cce2116dccfd31c53b3b573de69fed21cd7f608aaa02f6dfeb0a95aa809023bb",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:b8b9052b3f7d56e2dd619ea45cdfa34a8cde350b1d4f19929ce27c6ff30b2c25",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:27fac892ff49329ef447c4676f660edc1ddaf6a3afbf7eca4a0b416c40ea90f6",
+                "sha256:aa2d1d0d7cb51c6f16fc888e65e4e409e0db3edc843e3f37783928407d4f3348"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2025-07-15T09:13:05.741132863Z"
+        },
+        "Config": {
+            "ArgsEscaped": true,
+            "Cmd": [
+                "sleep infinity"
+            ],
+            "Entrypoint": null,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "testenv1=env1"
+            ],
+            "Labels": {
+                "org.opencontainers.image.ref.name": "ubuntu",
+                "org.opencontainers.image.version": "20.04"
+            },
+            "OnBuild": null,
+            "User": "user",
+            "Volumes": null,
+            "WorkingDir": ""
+        }
+    }
+]
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker history inno-dkr-11:default 
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+97250d0a758a   4 minutes ago   CMD ["sleep infinity"]                          0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   USER user                                       0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c chown user:user testfile # bu…   10.5MB    buildkit.dockerfile.v0
+<missing>      4 minutes ago   COPY testfile . # buildkit                      10.5MB    buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c rm -rf /var/lib/apt/lists/* #…   0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c apt-get update -y && apt-get …   118MB     buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      4 minutes ago   RUN /bin/sh -c groupadd --gid 2000 user && u…   658kB     buildkit.dockerfile.v0
+<missing>      4 minutes ago   ENV testenv1=env1                               0B        buildkit.dockerfile.v0
+<missing>      3 months ago    /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
+<missing>      3 months ago    /bin/sh -c #(nop) ADD file:f9ee450324e6ff2c9…   72.8MB    
+<missing>      3 months ago    /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  ARG RELEASE                  0B        
+
+ubuntu@ip-10-0-1-16:~$ docker images
+REPOSITORY    TAG             IMAGE ID       CREATED        SIZE
+inno-dkr-11   default         97250d0a758a   2 hours ago    212MB
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker build -t inno-dkr-11:optimized .
+[+] Building 17.4s (13/13) FINISHED                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                        0.0s
+ => => transferring dockerfile: 743B                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:20.04                                                             1.0s
+ => [internal] load .dockerignore                                                                                           0.0s
+ => => transferring context: 2B                                                                                             0.0s
+ => [1/8] FROM docker.io/library/ubuntu:20.04@sha256:8feb4d8ca5354def3d8fce243717141ce31e2c428701f6682bd2fafe15388214       0.0s
+ => [internal] load build context                                                                                           0.0s
+ => => transferring context: 32B                                                                                            0.0s
+ => CACHED [2/8] RUN groupadd --gid 2000 user && useradd --uid 2000 --gid 2000 --shell /bin/bash --create-home user         0.0s
+ => CACHED [3/8] RUN ls -lah /var/lib/apt/lists/                                                                            0.0s
+ => [4/8] RUN apt-get update -y && apt-get install nginx -y && rm -rf /var/lib/apt/lists/*                                 14.9s
+ => [5/8] RUN ls -lah /var/lib/apt/lists/                                                                                   0.2s 
+ => [6/8] RUN rm -rf /var/lib/apt/lists/*                                                                                   0.2s 
+ => [7/8] RUN ls -lah /var/lib/apt/lists/                                                                                   0.2s 
+ => [8/8] COPY --chown=user:user testfile .                                                                                 0.1s 
+ => exporting to image                                                                                                      0.7s 
+ => => exporting layers                                                                                                     0.6s 
+ => => writing image sha256:642e991ff57301f238cc939116501b0b9943d8bfa034b22af058d014c316a27f                                0.0s
+ => => naming to docker.io/library/inno-dkr-11:optimized                                                                    0.0s
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker history inno-dkr-11:optimized
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+642e991ff573   3 minutes ago   CMD ["sleep infinity"]                          0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   USER user                                       0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   COPY --chown=user:user testfile . # buildkit    10.5MB    buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c rm -rf /var/lib/apt/lists/* #…   0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c apt-get update -y && apt-get …   59.3MB    buildkit.dockerfile.v0
+<missing>      3 hours ago     RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 hours ago     RUN /bin/sh -c groupadd --gid 2000 user && u…   658kB     buildkit.dockerfile.v0
+<missing>      3 hours ago     ENV testenv1=env1                               0B        buildkit.dockerfile.v0
+<missing>      3 months ago    /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
+<missing>      3 months ago    /bin/sh -c #(nop) ADD file:f9ee450324e6ff2c9…   72.8MB    
+<missing>      3 months ago    /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B        
+<missing>      3 months ago    /bin/sh -c #(nop)  ARG RELEASE                  0B        
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker history inno-dkr-11:default 
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+97250d0a758a   3 hours ago    CMD ["sleep infinity"]                          0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    USER user                                       0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c chown user:user testfile # bu…   10.5MB    buildkit.dockerfile.v0
+<missing>      3 hours ago    COPY testfile . # buildkit                      10.5MB    buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c rm -rf /var/lib/apt/lists/* #…   0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c apt-get update -y && apt-get …   118MB     buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c ls -lah /var/lib/apt/lists/ #…   0B        buildkit.dockerfile.v0
+<missing>      3 hours ago    RUN /bin/sh -c groupadd --gid 2000 user && u…   658kB     buildkit.dockerfile.v0
+<missing>      3 hours ago    ENV testenv1=env1                               0B        buildkit.dockerfile.v0
+<missing>      3 months ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B        
+<missing>      3 months ago   /bin/sh -c #(nop) ADD file:f9ee450324e6ff2c9…   72.8MB    
+<missing>      3 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B        
+<missing>      3 months ago   /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B        
+<missing>      3 months ago   /bin/sh -c #(nop)  ARG RELEASE                  0B        
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images inno-dkr-11:default
+REPOSITORY    TAG       IMAGE ID       CREATED       SIZE
+inno-dkr-11   default   97250d0a758a   3 hours ago   212MB
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images inno-dkr-11:optimized
+REPOSITORY    TAG         IMAGE ID       CREATED         SIZE
+inno-dkr-11   optimized   642e991ff573   9 minutes ago   143MB
+
+
+

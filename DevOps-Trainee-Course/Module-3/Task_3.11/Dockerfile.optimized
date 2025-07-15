@@ -1,0 +1,22 @@
+FROM ubuntu:20.04
+ENV testenv1=env1
+#создадим пользователя
+RUN groupadd --gid 2000 user && useradd --uid 2000 --gid 2000 ->
+#посмотрим состояние кэша apt до установки nginx
+RUN ls -lah /var/lib/apt/lists/
+RUN apt-get update -y && apt-get install nginx -y && rm -rf /va>
+#Повторно проверим состояние кэша apt
+RUN ls -lah /var/lib/apt/lists/
+#Очистим кзш
+RUN rm -rf /var/lib/apt/lists/*
+RUN ls -lah /var/lib/apt/lists/
+#Скопируем наш тестовый файл
+COPY --chown=user:user testfile .
+#Сменим права
+USER user
+CMD ["sleep infinity"]
+
+
+
+
+
