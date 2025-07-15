@@ -1,0 +1,133 @@
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker pull nginx:stable-alpine
+stable-alpine: Pulling from library/nginx
+Digest: sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+Status: Image is up to date for nginx:stable-alpine
+docker.io/library/nginx:stable-alpine
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker tag nginx:stable-alpine nginx:inno-dkr-12
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images
+REPOSITORY    TAG             IMAGE ID       CREATED             SIZE
+inno-dkr-11   optimized       642e991ff573   About an hour ago   143MB
+inno-dkr-11   default         97250d0a758a   4 hours ago         212MB
+nginx         inno-dkr-10     2c9c47aae9db   25 hours ago        192MB
+nginx         inno-dkr-09     838468216364   26 hours ago        169MB
+<none>        <none>          e447c8ea4dcf   26 hours ago        169MB
+<none>        <none>          3cc219fef190   27 hours ago        169MB
+<none>        <none>          897ea800dfde   27 hours ago        169MB
+<none>        <none>          d05553906575   27 hours ago        169MB
+nginx         inno-dkr-08     0541dd8f5632   28 hours ago        192MB
+<none>        <none>          e4fe8c143507   28 hours ago        192MB
+nginx         stable          f6422896ca84   2 months ago        192MB
+nginx         inno-dkr-07     936a1208f403   2 months ago        48.2MB
+nginx         inno-dkr-12     936a1208f403   2 months ago        48.2MB
+nginx         stable-alpine   936a1208f403   2 months ago        48.2MB
+hello-world   latest          74cc54e27dc4   5 months ago        10.1kB
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker rmi nginx:stable-alpine 
+Untagged: nginx:stable-alpine
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images
+REPOSITORY    TAG           IMAGE ID       CREATED             SIZE
+inno-dkr-11   optimized     642e991ff573   About an hour ago   143MB
+inno-dkr-11   default       97250d0a758a   4 hours ago         212MB
+nginx         inno-dkr-10   2c9c47aae9db   25 hours ago        192MB
+nginx         inno-dkr-09   838468216364   26 hours ago        169MB
+<none>        <none>        e447c8ea4dcf   26 hours ago        169MB
+<none>        <none>        3cc219fef190   27 hours ago        169MB
+<none>        <none>        897ea800dfde   27 hours ago        169MB
+<none>        <none>        d05553906575   27 hours ago        169MB
+nginx         inno-dkr-08   0541dd8f5632   28 hours ago        192MB
+<none>        <none>        e4fe8c143507   28 hours ago        192MB
+nginx         inno-dkr-07   936a1208f403   2 months ago        48.2MB
+nginx         inno-dkr-12   936a1208f403   2 months ago        48.2MB
+nginx         stable        f6422896ca84   2 months ago        192MB
+hello-world   latest        74cc54e27dc4   5 months ago        10.1kB
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker pull nginx:stable-alpine
+stable-alpine: Pulling from library/nginx
+Digest: sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+Status: Downloaded newer image for nginx:stable-alpine
+docker.io/library/nginx:stable-alpine
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images | tee /home/ubuntu/images.txt
+REPOSITORY    TAG             IMAGE ID       CREATED             SIZE
+inno-dkr-11   optimized       642e991ff573   About an hour ago   143MB
+inno-dkr-11   default         97250d0a758a   4 hours ago         212MB
+nginx         inno-dkr-10     2c9c47aae9db   25 hours ago        192MB
+nginx         inno-dkr-09     838468216364   26 hours ago        169MB
+<none>        <none>          e447c8ea4dcf   26 hours ago        169MB
+<none>        <none>          897ea800dfde   27 hours ago        169MB
+<none>        <none>          3cc219fef190   27 hours ago        169MB
+<none>        <none>          d05553906575   27 hours ago        169MB
+nginx         inno-dkr-08     0541dd8f5632   28 hours ago        192MB
+<none>        <none>          e4fe8c143507   28 hours ago        192MB
+nginx         stable          f6422896ca84   2 months ago        192MB
+nginx         inno-dkr-07     936a1208f403   2 months ago        48.2MB
+nginx         inno-dkr-12     936a1208f403   2 months ago        48.2MB
+nginx         stable-alpine   936a1208f403   2 months ago        48.2MB
+hello-world   latest          74cc54e27dc4   5 months ago        10.1kB
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker rmi $(docker images nginx -qa) --force
+Untagged: nginx:inno-dkr-10
+Deleted: sha256:2c9c47aae9dbd9cfe90c2230163e56d8913793b960292dda3b9d63d28115441c
+Untagged: nginx:inno-dkr-09
+Deleted: sha256:8384682163643fe6270fc35d7895fa8879b80d2974118e8d166cbe43f6121ae0
+Untagged: nginx:inno-dkr-08
+Deleted: sha256:0541dd8f56320fa60cf50faae2dfd40e99ef02c554b8dad28c3fa050e79a18ec
+Untagged: nginx:stable
+Untagged: nginx@sha256:e2d0edf0e20951a190fe2322e27c6d790c675e9ff0018ba493947972f816f567
+Deleted: sha256:f6422896ca84c9af48d5417d6b7a573bf6b38f81edc15538907d987fc658d909
+Untagged: nginx:inno-dkr-07
+Untagged: nginx:inno-dkr-12
+Untagged: nginx:stable-alpine
+Untagged: nginx@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+Deleted: sha256:936a1208f403bdd270e7f1ef76a0d92cd48fd343ccc474a9cf13bed3b5199a46
+Error response from daemon: No such image: 936a1208f403:latest
+Error response from daemon: No such image: 936a1208f403:latest
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker images
+REPOSITORY    TAG         IMAGE ID       CREATED             SIZE
+inno-dkr-11   optimized   642e991ff573   About an hour ago   143MB
+inno-dkr-11   default     97250d0a758a   4 hours ago         212MB
+<none>        <none>      ab46753891b7   15 hours ago        192MB
+<none>        <none>      e447c8ea4dcf   27 hours ago        169MB
+<none>        <none>      3cc219fef190   27 hours ago        169MB
+<none>        <none>      897ea800dfde   27 hours ago        169MB
+<none>        <none>      d05553906575   27 hours ago        169MB
+<none>        <none>      e4fe8c143507   29 hours ago        192MB
+hello-world   latest      74cc54e27dc4   5 months ago        10.1kB
+
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker run -d --name inno-dkr-12 nginx:stable
+Unable to find image 'nginx:stable' locally
+stable: Pulling from library/nginx
+3da95a905ed5: Already exists 
+701a086b8dbe: Pull complete 
+a7a4bc075d7e: Pull complete 
+f5ffb7a82f4c: Pull complete 
+9b1b2276308f: Pull complete 
+39baa60ac966: Pull complete 
+930d190995b7: Pull complete 
+Digest: sha256:179f4cd0887d5e2b6ea04e50ef591336a9eeb4cb4f24b3ff854e220c015e0632
+Status: Downloaded newer image for nginx:stable
+49c451a5829aa8d8bd4b49ccff4321d20081298a7c48876c66be385a84287fa
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker rmi nginx:stable
+Error response from daemon: conflict: unable to remove repository reference "nginx:stable" (must force) - container 49c451a5829a is using its referenced image ab46753891b7
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker rmi nginx:stable --force
+Untagged: nginx:stable
+Untagged: nginx@sha256:179f4cd0887d5e2b6ea04e50ef591336a9eeb4cb4f24b3ff854e220c015e0632
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS              PORTS     NAMES
+49c451a5829a   ab46753891b7   "/docker-entrypoint.…"   About a minute ago   Up About a minute   80/tcp    inno-dkr-12
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker restart 49c451a5829a 
+49c451a5829a
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.11$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS         PORTS     NAMES
+49c451a5829a   ab46753891b7   "/docker-entrypoint.…"   About a minute ago   Up 4 seconds   80/tcp    inno-dkr-12
+
