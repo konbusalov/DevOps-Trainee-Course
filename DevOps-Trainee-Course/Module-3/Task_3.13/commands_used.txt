@@ -1,0 +1,141 @@
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:1 .
+[+] Building 7.2s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           1.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fcb4448bd  0.4s
+ => => resolve docker.io/library/alpine:latest@sha256:4bcff63911fcb4448bd  0.0s
+ => => sha256:9234e8fb04c47cfe0f49931e4ac7eb76fa904e33b7f8576 581B / 581B  0.0s
+ => => sha256:9824c27679d3b27c5e1cb00a73adb6f4f8d55699411 3.80MB / 3.80MB  0.2s
+ => => sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9b 9.22kB / 9.22kB  0.0s
+ => => sha256:eafc1edb577d2e9b458664a15f23ea1c37021419322 1.02kB / 1.02kB  0.0s
+ => => extracting sha256:9824c27679d3b27c5e1cb00a73adb6f4f8d556994111c12d  0.1s
+ => [2/2] RUN apk update && apk add build-base                             3.7s
+ => exporting to image                                                     1.4s 
+ => => exporting layers                                                    1.4s 
+ => => writing image sha256:6e9bb6b502b5a9e4223db9fa802be226511c0a1ea6378  0.0s 
+ => => naming to docker.io/library/cache:1                                 0.0s 
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:2 .
+[+] Building 0.5s (6/6) FINISHED                                 docker:default 
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           0.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fcb4448bd  0.0s
+ => CACHED [2/2] RUN apk update && apk add build-base                      0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:6e9bb6b502b5a9e4223db9fa802be226511c0a1ea6378  0.0s
+ => => naming to docker.io/library/cache:2                                 0.0s
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:2 --no-cache .
+[+] Building 5.7s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           0.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => CACHED [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fc  0.0s
+ => [2/2] RUN apk update && apk add build-base                             3.8s
+ => exporting to image                                                     1.4s 
+ => => exporting layers                                                    1.4s 
+ => => writing image sha256:ec64aafed7b5c64b508d55232ddfe16f1eb6fdb176b7e  0.0s 
+ => => naming to docker.io/library/cache:2                                 0.0s 
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:3 --build-arg MYARG=3 .
+[+] Building 6.1s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           0.9s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => CACHED [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fc  0.0s
+ => [2/2] RUN apk update && apk add build-base                             3.6s
+ => exporting to image                                                     1.5s 
+ => => exporting layers                                                    1.4s 
+ => => writing image sha256:972e4e5a6061db7bde81ff0cef181069e0cc98fa7db9f  0.0s 
+ => => naming to docker.io/library/cache:3                                 0.0s 
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:3 --build-arg MYARG=3 .                                                                           
+[+] Building 0.5s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           0.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fcb4448bd  0.0s
+ => CACHED [2/2] RUN apk update && apk add build-base                      0.0s
+ => exporting to image                                                     0.0s
+ => => exporting layers                                                    0.0s
+ => => writing image sha256:972e4e5a6061db7bde81ff0cef181069e0cc98fa7db9f  0.0s
+ => => naming to docker.io/library/cache:3                                 0.0s
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker build -t cache:4 --build-arg MYARG=4 .
+[+] Building 5.5s (6/6) FINISHED                                 docker:default
+ => [internal] load build definition from Dockerfile                       0.0s
+ => => transferring dockerfile: 103B                                       0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest           0.4s
+ => [internal] load .dockerignore                                          0.0s
+ => => transferring context: 2B                                            0.0s
+ => CACHED [1/2] FROM docker.io/library/alpine:latest@sha256:4bcff63911fc  0.0s
+ => [2/2] RUN apk update && apk add build-base                             3.6s
+ => exporting to image                                                     1.4s 
+ => => exporting layers                                                    1.3s 
+ => => writing image sha256:26ebbcf7d3538612ffdbc069b5d7b98d340e5ce5610d4  0.0s 
+ => => naming to docker.io/library/cache:4                                 0.0s 
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.13$ docker inspect 26ebbcf7d3538612ff
+[                                                                               
+    {
+        "Id": "sha256:26ebbcf7d3538612ffdbc069b5d7b98d340e5ce5610d40408acf3d2ef827518c",
+        "RepoTags": [
+            "cache:4"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2025-07-16T10:25:34.168420839Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 259722980,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/eadd10b5740bf9f6c73f8f4745123f71b9063f90cefa0db0efd870d0a4918977/diff",
+                "MergedDir": "/var/lib/docker/overlay2/hj6uvu42px7uskgs8i2sqnd21/merged",
+                "UpperDir": "/var/lib/docker/overlay2/hj6uvu42px7uskgs8i2sqnd21/diff",
+                "WorkDir": "/var/lib/docker/overlay2/hj6uvu42px7uskgs8i2sqnd21/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:418dccb7d85a63a6aa574439840f7a6fa6fd2321b3e2394568a317735e867d35",
+                "sha256:9063a5095b259c976cd760f714419b04d3ed35a183bb5e8eb9fb4278fe90cdc7"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2025-07-16T10:25:35.524662805Z"
+        },
+        "Config": {
+            "Cmd": [
+                "/bin/sh"
+            ],
+            "Entrypoint": null,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Labels": null,
+            "OnBuild": null,
+            "User": "",
+            "Volumes": null,
+            "WorkingDir": "/"
+        }
+    }
+]
