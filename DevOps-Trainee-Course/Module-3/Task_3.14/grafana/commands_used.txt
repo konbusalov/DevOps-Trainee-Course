@@ -1,0 +1,11 @@
+git checkout --force v6.3.x    
+
+sudo docker build --target=final -t grafana:app .  
+
+sudo docker build -t grafana:static .
+
+sudo docker images                   
+REPOSITORY            TAG              IMAGE ID       CREATED              SIZE
+grafana               static           9d3a89f18314   22 seconds ago       228MB
+grafana               app              4c1d465027db   About a minute ago   245MB
+
