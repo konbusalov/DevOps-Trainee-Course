@@ -1,0 +1,85 @@
+FROM ruby:3.2-bullseye AS builder
+
+ENV RAILS_ENV=production \
+    BUNDLE_APP_CONFIG=/home/my_user/bundle \
+    BUNDLE_PATH=/home/my_user/bundle \
+    GEM_HOME=/home/my_user/bundle \
+    RUBYOPT=--yjit  
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+    build-essential \
+    gnupg2 \
+    curl \
+    less \
+    git
+
+COPY audiowaveform_1.8.1-1-11_amd64.deb ./
+
+RUN apt-get update -q && \
+    apt-get install -y software-properties-common && \
+    apt-get update -q && \
+    apt-get install -yq --no-install-recommends ./audiowaveform_1.8.1-1-11_amd64.deb && \
+    apt-get install -yq --no-install-recommends \
+    default-libmysqlclient-dev \
+    libvips \
+    libvips-dev \
+    audiowaveform \ 
+    rustc  
+
+RUN apt-get update && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+    apt-get install -yq --no-install-recommends nodejs
+RUN npm install -g yarn@latest
+
+RUN groupadd --gid 1005 my_user \
+  && useradd --uid 1005 --gid my_user --shell /bin/bash --create-home my_user
+USER my_user
+RUN mkdir /home/my_user/app
+WORKDIR /home/my_user/app
+
+COPY --chown=my_user:my_user Gemfile Gemfile.lock package.json yarn.lock ./
+
+RUN mkdir $BUNDLE_PATH && \
+    bundle config --local path "${BUNDLE_PATH}" && \
+    bundle install --without development test && \
+    yarn install --production 
+
+COPY --chown=my_user:my_user . .
+
+RUN echo "production:\n  adapter: mysql2\n  encoding: utf8mb4\n  database: alonetone_production\n  host: db\n  username: mysql\n  password: ''" > /home/my_user/app/config/database.yml && \
+    echo "production: {}" > /home/my_user/app/config/alonetone.yml
+
+RUN rm /home/my_user/app/lib/tasks/spec.rake
+
+RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
+
+FROM ruby:3.2-bullseye AS production
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+    default-mysql-client \
+    gnupg2 \
+    curl \
+    less \
+    git \
+    && rm -rf /var/lib/apt/lists/*  
+
+RUN gem update --system && \
+    gem install bundle
+
+RUN groupadd --gid 1005 my_user \
+    && useradd --uid 1005 --gid my_user --shell /bin/bash --create-home my_user
+RUN mkdir /home/my_user/app
+WORKDIR /home/my_user/app
+USER my_user
+
+ENV RAILS_ENV=production \
+    BUNDLE_APP_CONFIG=/home/my_user/bundle \
+    BUNDLE_PATH=/home/my_user/bundle \
+    GEM_HOME=/home/my_user/bundle \
+    PATH=/home/my_user/app/bin:$PATH
+
+COPY --from=builder $BUNDLE_PATH $BUNDLE_PATH
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

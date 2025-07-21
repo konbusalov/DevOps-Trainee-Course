@@ -1,0 +1,39 @@
+FROM ruby:3.2-bullseye
+
+ENV RAILS_ENV=test \
+    RUBYOPT=--yjit
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+    build-essential \
+    gnupg2 \
+    curl \
+    less \
+    git
+
+COPY Gemfile Gemfile.lock package.json yarn.lock audiowaveform_1.8.1-1-11_amd64.deb ./
+
+RUN apt-get update -q && \
+    apt-get install -y software-properties-common && \
+    apt-get update -q && \
+    apt-get install -yq --no-install-recommends ./audiowaveform_1.8.1-1-11_amd64.deb && \
+    apt-get install -yq --no-install-recommends \
+    libvips \
+    libvips-dev \
+    audiowaveform \ 
+    rustc  
+
+RUN apt-get update && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+    apt-get install -yq --no-install-recommends nodejs
+RUN npm install -g yarn@latest
+
+WORKDIR /app
+
+RUN bundler install && \
+    yarn install
+
+COPY . .
+
+CMD ["bin/bash"]
+

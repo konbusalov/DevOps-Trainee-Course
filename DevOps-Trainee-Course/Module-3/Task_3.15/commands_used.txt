@@ -1,0 +1,8 @@
+ubuntu@ip-10-0-1-16:~/docker-task-3.15/dkr-17-alonetone$ docker build -f Dockerfile.dev -t alonetone:dev .
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.15/dkr-17-alonetone$ docker build -f Dockerfile.prod -t alonetone:prod .
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.15/dkr-17-alonetone$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
+alonetone    dev       f97be405ef5f   About a minute ago   2.29GB
+alonetone    prod      5d73118f32d2   27 minutes ago       1.11GB
