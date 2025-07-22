@@ -1,0 +1,54 @@
+ubuntu@ip-10-0-1-16:~$ docker run -d -p 5000:5000 --name registry registry:3
+Unable to find image 'registry:3' locally
+3: Pulling from library/registry
+0368fd46e3c6: Pull complete 
+56cbcc5405f0: Pull complete 
+b65b097f3c34: Pull complete 
+60999dff384a: Pull complete 
+e6a3228d448c: Pull complete 
+Digest: sha256:3725021071ec9383eb3d87ddbdff9ed602439b3f7c958c9c2fb941049ea6531d
+Status: Downloaded newer image for registry:3
+716e88383aee8fa19501ccc22c388e8a18168dd9ff248c9aa3d4d3ca0c1858d3
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker build -t localhost:5000/go-app .
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker push localhost:5000/my-app
+Using default tag: latest
+The push refers to repository [localhost:5000/my-app]
+An image does not exist locally with the tag: localhost:5000/my-app
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker push localhost:5000/go-app
+Using default tag: latest
+The push refers to repository [localhost:5000/go-app]
+03cb9af3d243: Pushed 
+fdeb637e44e8: Pushed 
+77cae8ab23bf: Pushed 
+latest: digest: sha256:e64e2408adf2c82c671b307ee7ddf0e7dcd3b5ddd5ddc5d43e30cf02af636f01 size: 946
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker login
+
+USING WEB-BASED LOGIN
+
+i Info → To sign in with credentials on the command line, use 'docker login -u <username>'
+         
+
+Your one-time device confirmation code is: FJMR-HLSW
+Press ENTER to open your browser or submit your device code here: https://login.docker.com/activate
+
+Waiting for authentication in the browser…
+
+WARNING! Your credentials are stored unencrypted in '/home/ubuntu/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker tag localhost:5000/go-app:latest konbusalov/go-app
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.14/docker/gocalc$ docker push konbusalov/go-app:latest
+The push refers to repository [docker.io/konbusalov/go-app]
+03cb9af3d243: Pushed 
+fdeb637e44e8: Pushed 
+77cae8ab23bf: Mounted from library/alpine 
+latest: digest: sha256:e64e2408adf2c82c671b307ee7ddf0e7dcd3b5ddd5ddc5d43e30cf02af636f01 size: 946
+
