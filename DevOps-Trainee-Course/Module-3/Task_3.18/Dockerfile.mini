@@ -1,0 +1,21 @@
+FROM python:3.7-buster as base
+
+WORKDIR /app/
+
+RUN pip install pipenv
+
+COPY Pipfile Pipfile.lock .
+
+RUN pipenv sync && \
+    rm Pipfile* && \
+    pip uninstall pip -y
+    
+COPY . . 
+
+CMD ['pipenv', 'run', 'python', 'server.py']
+
+FROM python:3.7-buster 
+
+COPY --from=base /app/ /app/
+
+CMD ['pipenv', 'run', 'python', 'server.py']
