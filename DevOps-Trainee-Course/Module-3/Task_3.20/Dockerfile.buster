@@ -1,0 +1,35 @@
+FROM openjdk:8-jdk-buster
+
+ENV MAVEN_HOME=/opt/maven
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
+
+RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
+    sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i '/buster-updates/d' /etc/apt/sources.list
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gcc \
+    autoconf \
+    automake \
+    libtool \
+    pkg-config \
+    build-essential \
+    libcppunit-dev \
+    python2.7-dev \
+    python-setuptools \
+    libssl-dev \
+    libsasl2-modules-gssapi-mit \
+    libsasl2-modules \
+    libsasl2-dev && \
+    curl -o maven.tar.gz https://dlcdn.apache.org/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.tar.gz && \
+    mkdir -p ${MAVEN_HOME} && \
+    tar -xvf maven.tar.gz -C ${MAVEN_HOME} --strip-components=1 && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app/
+
+COPY . .
+
+RUN mvn clean install -DskipTests && \
+    mvn install -Pfull-build -DskipTests

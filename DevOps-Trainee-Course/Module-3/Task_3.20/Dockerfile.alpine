@@ -1,0 +1,32 @@
+FROM openjdk:8-jdk-alpine
+
+ENV MAVEN_HOME=/opt/maven
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
+
+RUN apk add --no-cache \
+    build-base \
+    gcc \
+    autoconf \
+    automake \
+    libtool \
+    pkgconf \
+    cppunit-dev \
+    python2-dev \
+    py2-setuptools \
+    openssl-dev \
+    cyrus-sasl \
+    cyrus-sasl-dev \
+    curl \
+    tar \
+    gzip && \
+    curl -o maven.tar.gz https://dlcdn.apache.org/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.tar.gz && \
+    mkdir -p ${MAVEN_HOME} && \
+    tar -xvf maven.tar.gz -C ${MAVEN_HOME} --strip-components=1 && \
+    rm maven.tar.gz
+
+WORKDIR /app/
+
+COPY . .
+
+RUN mvn clean install -DskipTests && \
+    mvn install -Pfull-build -DskipTests
