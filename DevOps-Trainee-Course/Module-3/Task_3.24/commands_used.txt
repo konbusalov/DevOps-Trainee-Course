@@ -1,0 +1,93 @@
+ kon  docker run --privileged -d --name inno-dkr-dind docker:dind
+b8a15d8f4100e820f985d4946289376b5c674298c9854a2dd5fa37c436986b77
+               
+ [~]
+ kon  docker exec -it inno-dkr-dind sh
+/ # docker images 
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+/ # docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+/ # docker pull redis:5
+5: Pulling from library/redis
+a603fa5e3b41: Pull complete 
+77631c3ef092: Pull complete 
+ed3847cf62b8: Pull complete 
+295236254fbb: Pull complete 
+1d25d6f70191: Pull complete 
+23acdbbf5eef: Pull complete 
+Digest: sha256:fc5ecd863862f89f04334b7cbb57e93c9790478ea8188a49f6e57b0967d38c75
+Status: Downloaded newer image for redis:5
+docker.io/library/redis:5
+/ # docker run -d --name inno-dkr-26 redis:5
+83a16d1c90372d583a3220ba496bd50aea8dab73f201f309b7c837a8b26cba13
+/ # docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS      NAMES
+83a16d1c9037   redis:5   "docker-entrypoint.s…"   10 seconds ago   Up 10 seconds   6379/tcp   inno-dkr-26
+/ # docker rm --force inno-dkr-26
+inno-dkr-26
+/ # docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+/ # ^C
+
+/ # exit 
+               
+ [~]
+ ✘  kon  docker run -v /var/run/docker.sock:/var/run/docker.sock --name inno-dkr-dind-2 -it docker sh
+Unable to find image 'docker:latest' locally
+latest: Pulling from library/docker
+Digest: sha256:44383404ebf0c36243f5969f0dddd23c204ea3bb185e7473a4141f6ccfd07b53
+Status: Downloaded newer image for docker:latest
+/ # docker images 
+REPOSITORY   TAG             IMAGE ID       CREATED        SIZE
+nginx        stable          f36b8965af58   13 days ago    192MB
+docker       dind            4126286c8703   2 weeks ago    408MB
+docker       latest          4126286c8703   2 weeks ago    408MB
+mongo        latest          a7c5f35e6c6d   2 months ago   890MB
+nginx        stable-alpine   aec7f4ce8b81   3 months ago   48.2MB
+alpine       3.10            e7b300aee9f9   4 years ago    5.58MB
+/ # docker ps -a
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS                      PORTS                                             NAMES
+14baa139aa64   docker                "dockerd-entrypoint.…"   34 seconds ago   Up 34 seconds               2375-2376/tcp                                     inno-dkr-dind-2
+b8a15d8f4100   docker:dind           "dockerd-entrypoint.…"   5 minutes ago    Up 4 minutes                2375-2376/tcp                                     inno-dkr-dind
+74009a09ebf2   alpine:3.10           "sh"                     19 minutes ago   Exited (0) 18 minutes ago                                                     inno-dkr-25-pinger
+eeeb09e074b8   nginx:stable          "/docker-entrypoint.…"   21 minutes ago   Up 21 minutes               80/tcp                                            inno-dkr-25-nginx
+fb330b430a68   nginx:stable-alpine   "/docker-entrypoint.…"   2 days ago       Up 30 minutes               127.0.0.1:8080->80/tcp                            inno-dkr-24
+dcd48262ab56   nginx:stable          "/docker-entrypoint.…"   2 days ago       Exited (137) 2 days ago                                                       inno-dkr-23-unless-stopped
+ec3977b6a2e5   nginx:stable          "/docker-entrypoint.…"   2 days ago       Up 2 hours                  80/tcp                                            inno-dkr-23-always
+dba0e5de6fd6   mongo:latest          "docker-entrypoint.s…"   8 weeks ago      Up 2 hours                  0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   calorie_tracker_mongodb_1
+/ # docker run -d --name inno-dkr-26 redis:5
+Unable to find image 'redis:5' locally
+5: Pulling from library/redis
+a603fa5e3b41: Pull complete 
+77631c3ef092: Pull complete 
+ed3847cf62b8: Pull complete 
+295236254fbb: Pull complete 
+1d25d6f70191: Pull complete 
+23acdbbf5eef: Pull complete 
+Digest: sha256:fc5ecd863862f89f04334b7cbb57e93c9790478ea8188a49f6e57b0967d38c75
+Status: Downloaded newer image for redis:5
+dedd80ce3b792b5d4019eed4e87e071d190903af86158ce0bf3a00669dbb6014
+/ # docker ps -a
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS                      PORTS                                             NAMES
+dedd80ce3b79   redis:5               "docker-entrypoint.s…"   26 seconds ago   Up 25 seconds               6379/tcp                                          inno-dkr-26
+14baa139aa64   docker                "dockerd-entrypoint.…"   2 minutes ago    Up 2 minutes                2375-2376/tcp                                     inno-dkr-dind-2
+b8a15d8f4100   docker:dind           "dockerd-entrypoint.…"   6 minutes ago    Up 6 minutes                2375-2376/tcp                                     inno-dkr-dind
+74009a09ebf2   alpine:3.10           "sh"                     21 minutes ago   Exited (0) 20 minutes ago                                                     inno-dkr-25-pinger
+eeeb09e074b8   nginx:stable          "/docker-entrypoint.…"   23 minutes ago   Up 23 minutes               80/tcp                                            inno-dkr-25-nginx
+fb330b430a68   nginx:stable-alpine   "/docker-entrypoint.…"   2 days ago       Up 32 minutes               127.0.0.1:8080->80/tcp                            inno-dkr-24
+dcd48262ab56   nginx:stable          "/docker-entrypoint.…"   2 days ago       Exited (137) 2 days ago                                                       inno-dkr-23-unless-stopped
+ec3977b6a2e5   nginx:stable          "/docker-entrypoint.…"   2 days ago       Up 2 hours                  80/tcp                                            inno-dkr-23-always
+dba0e5de6fd6   mongo:latest          "docker-entrypoint.s…"   8 weeks ago      Up 2 hours                  0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   calorie_tracker_mongodb_1
+/ # docker rm --force inno-dkr-26
+inno-dkr-26
+/ # docker ps -a
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS                      PORTS                                             NAMES
+14baa139aa64   docker                "dockerd-entrypoint.…"   2 minutes ago    Up 2 minutes                2375-2376/tcp                                     inno-dkr-dind-2
+b8a15d8f4100   docker:dind           "dockerd-entrypoint.…"   7 minutes ago    Up 7 minutes                2375-2376/tcp                                     inno-dkr-dind
+74009a09ebf2   alpine:3.10           "sh"                     21 minutes ago   Exited (0) 21 minutes ago                                                     inno-dkr-25-pinger
+eeeb09e074b8   nginx:stable          "/docker-entrypoint.…"   23 minutes ago   Up 23 minutes               80/tcp                                            inno-dkr-25-nginx
+fb330b430a68   nginx:stable-alpine   "/docker-entrypoint.…"   2 days ago       Up 33 minutes               127.0.0.1:8080->80/tcp                            inno-dkr-24
+dcd48262ab56   nginx:stable          "/docker-entrypoint.…"   2 days ago       Exited (137) 2 days ago                                                       inno-dkr-23-unless-stopped
+ec3977b6a2e5   nginx:stable          "/docker-entrypoint.…"   2 days ago       Up 2 hours                  80/tcp                                            inno-dkr-23-always
+dba0e5de6fd6   mongo:latest          "docker-entrypoint.s…"   8 weeks ago      Up 2 hours                  0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   calorie_tracker_mongodb_1
+s
