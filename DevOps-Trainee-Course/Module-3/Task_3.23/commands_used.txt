@@ -1,0 +1,66 @@
+ kon  docker network create inno-dkr-25
+d4185a9633f72821c975707d4daf6a3a26c5a233551c83c7db2cf1385356c25c
+               
+ [~]
+ kon  docker network ls                
+NETWORK ID     NAME                      DRIVER    SCOPE
+b3b6e8e6a394   bridge                    bridge    local
+7454993f446c   calorie_tracker_default   bridge    local
+7d7b364f7b2e   host                      host      local
+d4185a9633f7   inno-dkr-25               bridge    local
+c609db9474b9   none                      null      local
+               
+ [~]
+ kon  docker run -d --name inno-dkr-25-nginx --network inno-dkr-25 nginx:stable
+eeeb09e074b83ae343e5d9f36848602f2864a6347a906565736e78e0f7bc56b6
+               
+ [~]
+ kon  docker run -itd --name inno-dkr-25-pinger --network inno-dkr-25 alpine:3.10 sh
+Unable to find image 'alpine:3.10' locally
+3.10: Pulling from library/alpine
+396c31837116: Pull complete 
+Digest: sha256:451eee8bedcb2f029756dc3e9d73bab0e7943c1ac55cff3a4861c52a0fdd3e98
+Status: Downloaded newer image for alpine:3.10
+bffaa190b89ac98728963aa4a9c4edcf33de5b310577c41902e9e97ce9acea87
+               
+ [~]
+ kon  docker rm --force inno-dkr-25-pinger                                          
+inno-dkr-25-pinger
+               
+ [~]
+ kon  docker run -it --name inno-dkr-25-pinger --network inno-dkr-25 alpine:3.10 sh 
+/ # apk add curl
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.10/community/x86_64/APKINDEX.tar.gz
+(1/4) Installing ca-certificates (20191127-r2)
+(2/4) Installing nghttp2-libs (1.39.2-r1)
+(3/4) Installing libcurl (7.66.0-r4)
+(4/4) Installing curl (7.66.0-r4)
+Executing busybox-1.30.1-r5.trigger
+Executing ca-certificates-20191127-r2.trigger
+OK: 7 MiB in 18 packages
+/ # curl inno-dkr-25-nginx
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+/ # exit
