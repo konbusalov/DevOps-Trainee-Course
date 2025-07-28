@@ -1,0 +1,29 @@
+ubuntu@ip-10-0-1-16:~/docker-task-3.25$ docker-compose -p inno27 up -d
+Creating network "inno27_default" with the default driver
+Pulling nginx (nginx:stable)...
+stable: Pulling from library/nginx
+59e22667830b: Pull complete
+957019e2c1c5: Pull complete
+2f243851dc1f: Pull complete
+ebde95c437f9: Pull complete
+9de9c1297ddb: Pull complete
+c6dac0d6a0f3: Pull complete
+46f3d8a9d1e3: Pull complete
+Digest: sha256:7935b9ee80fe4076ce8ca637fe7bb0c7a1268e2bd854032a0563ecc96bfa6747
+Status: Downloaded newer image for nginx:stable
+Creating inno27_nginx_1 ... done
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.25$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+4623e8e5a2e8   nginx:stable   "/docker-entrypoint.…"   13 seconds ago   Up 13 seconds   0.0.0.0:8010->80/tcp, [::]:8010->80/tcp   inno27_nginx_1
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.25$ docker-compose -f docker-compose-mounted.yml -p inno27 up -d
+Creating network "inno27_default" with the default driver
+Creating inno27_nginx_1 ... done
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.25$ docker ps 
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+26589290d2f0   nginx:stable   "/docker-entrypoint.…"   16 seconds ago   Up 15 seconds   0.0.0.0:8010->80/tcp, [::]:8010->80/tcp   inno27_nginx_1
+
+ubuntu@ip-10-0-1-16:~/docker-task-3.25$ curl http://127.0.0.1:8010
+Welcome to the training program Innowise: Docker! Again!
