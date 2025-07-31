@@ -1,0 +1,38 @@
+docker run -d -p 5000:5000 --restart always --name registry registry:3 
+
+docker pull nginx:stable            
+stable: Pulling from library/nginx
+Digest: sha256:7935b9ee80fe4076ce8ca637fe7bb0c7a1268e2bd854032a0563ecc96bfa6747
+Status: Image is up to date for nginx:stable
+docker.io/library/nginx:stable
+
+docker tag nginx:stable 172.17.0.2:5000/inno-dkr-30
+
+docker push 172.17.0.2:5000/inno-dkr-30                          
+Using default tag: latest
+The push refers to repository [172.17.0.2:5000/inno-dkr-30]
+Get "https://172.17.0.2:5000/v2/": http: server gave HTTP response to HTTPS client
+
+docker push 172.17.0.2:5000/inno-dkr-30
+Using default tag: latest
+The push refers to repository [172.17.0.2:5000/inno-dkr-30]
+861925f3202d: Pushed 
+79535a2da1d6: Pushed 
+1eaccdac9e53: Pushed 
+9362934ed527: Pushed 
+182bf1d6d5d1: Pushed 
+8c207dc8e96d: Pushed 
+7cc7fe68eff6: Pushed 
+latest: digest: sha256:23962e3250fd77c4b059b985ceab2ff3f7c9ea816b92667c67b50685c61307f8 size: 1778
+
+docker rmi 172.17.0.2:5000/inno-dkr-30:latest 
+Untagged: 172.17.0.2:5000/inno-dkr-30:latest
+Untagged: 172.17.0.2:5000/inno-dkr-30@sha256:23962e3250fd77c4b059b985ceab2ff3f7c9ea816b92667c67b50685c61307f8
+
+ docker pull 172.17.0.2:5000/inno-dkr-30
+Using default tag: latest
+latest: Pulling from inno-dkr-30
+Digest: sha256:23962e3250fd77c4b059b985ceab2ff3f7c9ea816b92667c67b50685c61307f8
+Status: Downloaded newer image for 172.17.0.2:5000/inno-dkr-30:latest
+172.17.0.2:5000/inno-dkr-30:latest
+
