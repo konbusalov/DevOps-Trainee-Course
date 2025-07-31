@@ -1,0 +1,142 @@
+ip addr     
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: wlp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether e8:fb:1c:72:93:c5 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.162/24 brd 192.168.0.255 scope global dynamic noprefixroute wlp2s0
+       valid_lft 50086sec preferred_lft 50086sec
+    inet6 fe80::a4e4:7a9d:2844:c31/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 3a:5d:16:a6:b0:50 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 2001:db8:1::1/64 scope global nodad 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::385d:16ff:fea6:b050/64 scope link 
+       valid_lft forever preferred_lft forever
+4: br-7454993f446c: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether f6:34:3a:5d:a3:83 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-7454993f446c
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f434:3aff:fe5d:a383/64 scope link 
+       valid_lft forever preferred_lft forever
+5: br-d4185a9633f7: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether fe:c0:e1:a3:06:9c brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 brd 172.19.255.255 scope global br-d4185a9633f7
+       valid_lft forever preferred_lft forever
+339: br-1196b592b410: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 2e:8f:64:90:e6:1c brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.1/16 brd 172.20.255.255 scope global br-1196b592b410
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2c8f:64ff:fe90:e61c/64 scope link 
+       valid_lft forever preferred_lft forever
+374: vethbeec380@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether ca:9e:c4:15:51:89 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::c89e:c4ff:fe15:5189/64 scope link 
+       valid_lft forever preferred_lft forever
+375: veth2095e89@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-7454993f446c state UP group default 
+    link/ether 72:15:31:cc:40:ac brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet6 fe80::7015:31ff:fecc:40ac/64 scope link 
+       valid_lft forever preferred_lft forever
+376: veth4cab462@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether 96:1d:78:09:c5:90 brd ff:ff:ff:ff:ff:ff link-netnsid 2
+    inet6 fe80::941d:78ff:fe09:c590/64 scope link 
+       valid_lft forever preferred_lft forever
+
+docker run -d nginx:stable
+6ba345be198cb5bf10eb1be0a3ec41e96b8de529531b23e618f4ed33c00bf333
+
+ip addr                                
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: wlp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether e8:fb:1c:72:93:c5 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.162/24 brd 192.168.0.255 scope global dynamic noprefixroute wlp2s0
+       valid_lft 49998sec preferred_lft 49998sec
+    inet6 fe80::a4e4:7a9d:2844:c31/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 3a:5d:16:a6:b0:50 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 2001:db8:1::1/64 scope global nodad 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::385d:16ff:fea6:b050/64 scope link 
+       valid_lft forever preferred_lft forever
+4: br-7454993f446c: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether f6:34:3a:5d:a3:83 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-7454993f446c
+       valid_lft forever preferred_lft forever
+    inet6 fe80::f434:3aff:fe5d:a383/64 scope link 
+       valid_lft forever preferred_lft forever
+5: br-d4185a9633f7: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether fe:c0:e1:a3:06:9c brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 brd 172.19.255.255 scope global br-d4185a9633f7
+       valid_lft forever preferred_lft forever
+339: br-1196b592b410: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 2e:8f:64:90:e6:1c brd ff:ff:ff:ff:ff:ff
+    inet 172.20.0.1/16 brd 172.20.255.255 scope global br-1196b592b410
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2c8f:64ff:fe90:e61c/64 scope link 
+       valid_lft forever preferred_lft forever
+374: vethbeec380@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether ca:9e:c4:15:51:89 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::c89e:c4ff:fe15:5189/64 scope link 
+       valid_lft forever preferred_lft forever
+375: veth2095e89@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-7454993f446c state UP group default 
+    link/ether 72:15:31:cc:40:ac brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet6 fe80::7015:31ff:fecc:40ac/64 scope link 
+       valid_lft forever preferred_lft forever
+376: veth4cab462@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether 96:1d:78:09:c5:90 brd ff:ff:ff:ff:ff:ff link-netnsid 2
+    inet6 fe80::941d:78ff:fe09:c590/64 scope link 
+       valid_lft forever preferred_lft forever
+377: veth34c0287@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master docker0 state UP group default 
+    link/ether 82:e1:be:4a:2c:4e brd ff:ff:ff:ff:ff:ff link-netnsid 3
+    inet6 fe80::80e1:beff:fe4a:2c4e/64 scope link 
+       valid_lft forever preferred_lft forever
+
+nslookup              
+> google.com
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 142.250.203.206
+Name:	google.com
+Address: 2a00:1450:401b:810::200e
+> commands_used.txt 
+[1]  + 534093 suspended  nslookup
+
+docker exec -it sad_swanson /bin/bash                                 
+root@6ba345be198c:/# curl -i sad_swanson
+curl: (6) Could not resolve host: sad_swanson
+root@6ba345be198c:/# curl -i 2a00:1450:401b:810::200e
+curl: (3) URL using bad/illegal format or missing URL
+root@6ba345be198c:/# exit
+exit
+
+sudo systemctl restart docker
+
+docker ps -a              
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                           PORTS                                             NAMES
+6ba345be198c   nginx:stable            "/docker-entrypoint.…"   12 minutes ago      Exited (0) 20 seconds ago                                                          sad_swanson
+
+ docker run -d --name lol nginx:stable 
+5d3b975bb9cc73f9c43d517bc8c7201148206b2b33f387fa0b135bb815748904
+
+sudo systemctl restart docker
+
+docker ps -a                          
+CONTAINER ID   IMAGE                   COMMAND                  CREATED             STATUS                       PORTS                                             NAMES
+5d3b975bb9cc   nginx:stable            "/docker-entrypoint.…"   2 minutes ago       Up 2 minutes                 80/tcp                                            lol
