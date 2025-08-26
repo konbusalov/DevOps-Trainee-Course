@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-north-1"
+  region = var.region
   shared_config_files = ["/home/kon/.aws/config"]
   shared_credentials_files = [ "/home/kon/.aws/credentials" ]
   profile = "trainee"
