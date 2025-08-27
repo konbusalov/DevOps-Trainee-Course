@@ -13,6 +13,10 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "ec2" {
+  lifecycle {
+    ignore_changes = [user_data]
+  }
+
   ami = data.aws_ami.ubuntu.id
   for_each = var.instance_configs
   instance_type = each.value
