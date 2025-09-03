@@ -5,8 +5,8 @@ locals {
 }
 
 module "vpc" {
-    source = "./modules/vpc"
-    name_prefix = "trainee_project"
+    source = "../../modules/vpc"
+    name_prefix = "prod_trainee_project"
     azs = local.azs
     vpc_cidr = "10.0.0.0/16"
     public_subnets = [for k, v in local.azs : cidrsubnet("10.0.0.0/16", 8, k + 4)]
