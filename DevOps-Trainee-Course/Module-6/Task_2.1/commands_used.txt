@@ -1,0 +1,6 @@
+ubuntu@ip-172-31-40-19:~$ kubectl run nginx --image nginx:stable --port 80
+pod/nginx created
+
+kubectl port-forward nginx 8080:80
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
