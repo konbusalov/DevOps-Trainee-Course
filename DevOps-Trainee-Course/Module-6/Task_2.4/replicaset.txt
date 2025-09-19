@@ -1,0 +1,24 @@
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl apply -f replicaset.yaml 
+replicaset.apps/kuber-rs created
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po -L app
+NAME             READY   STATUS    RESTARTS   AGE   APP
+kuber-rs-9xxkz   1/1     Running   0          16s   app1
+kuber-rs-m8kpz   1/1     Running   0          16s   app1
+kuber-rs-wg68k   1/1     Running   0          16s   app1
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl delete po kuber-rs-9xxkz 
+pod "kuber-rs-9xxkz" deleted from default namespace
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po -L app
+NAME             READY   STATUS    RESTARTS   AGE   APP
+kuber-rs-m8kpz   1/1     Running   0          47s   app1
+kuber-rs-wg68k   1/1     Running   0          47s   app1
+kuber-rs-xdcwf   1/1     Running   0          6s    app1
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl delete -f replicaset.yaml 
+replicaset.apps "kuber-rs" deleted from default namespace
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po -L app1
+No resources found in default namespace.
+
