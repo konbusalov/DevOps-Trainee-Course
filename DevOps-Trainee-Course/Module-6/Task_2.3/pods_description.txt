@@ -1,0 +1,106 @@
+Name:             nginx-pod-1
+Namespace:        app1
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 19 Sep 2025 14:12:45 +0000
+Labels:           app=app1
+Annotations:      creator_email: konstantin.busalov@innowise.com
+Status:           Running
+IP:               10.244.0.13
+IPs:
+  IP:  10.244.0.13
+Containers:
+  nginx-container:
+    Container ID:   docker://87c4c2eab53bedf9be57151b606e7f3c698be4af1a62dad39e3c2bdbca4fedb1
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 19 Sep 2025 14:12:47 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-xwttf (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-xwttf:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  10m   default-scheduler  Successfully assigned app1/nginx-pod-1 to minikube
+  Normal  Pulling    10m   kubelet            Pulling image "nginx"
+  Normal  Pulled     10m   kubelet            Successfully pulled image "nginx" in 1.139s (1.14s including waiting). Image size: 192385289 bytes.
+  Normal  Created    10m   kubelet            Created container: nginx-container
+  Normal  Started    10m   kubelet            Started container nginx-container
+
+
+Name:             nginx-pod-2
+Namespace:        app2
+Priority:         0
+Service Account:  default
+Node:             minikube/192.168.49.2
+Start Time:       Fri, 19 Sep 2025 14:12:45 +0000
+Labels:           app=app2
+Annotations:      creator_email: konstantin.busalov@innowise.com
+Status:           Running
+IP:               10.244.0.12
+IPs:
+  IP:  10.244.0.12
+Containers:
+  nginx-container:
+    Container ID:   docker://699d4f34132e870ea44b21b947c3fc4a519d4577782651f636ed5850ec22c29c
+    Image:          nginx
+    Image ID:       docker-pullable://nginx@sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 19 Sep 2025 14:12:49 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-wjc87 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-wjc87:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  10m   default-scheduler  Successfully assigned app2/nginx-pod-2 to minikube
+  Normal  Pulling    10m   kubelet            Pulling image "nginx"
+  Normal  Pulled     10m   kubelet            Successfully pulled image "nginx" in 1.086s (2.225s including waiting). Image size: 192385289 bytes.
+  Normal  Created    10m   kubelet            Created container: nginx-container
+  Normal  Started    10m   kubelet            Started container nginx-container
