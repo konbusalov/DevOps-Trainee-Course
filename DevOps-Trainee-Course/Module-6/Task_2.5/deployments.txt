@@ -1,0 +1,34 @@
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl apply -f deployment.yaml 
+deployment.apps/nginx created
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           12s
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-6768d7c7bb-6rqgn   1/1     Running   0          23s
+nginx-6768d7c7bb-gsz95   1/1     Running   0          23s
+nginx-6768d7c7bb-trzvp   1/1     Running   0          23s
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-6768d7c7bb   3         3         3       30s
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl delete pod nginx-6768d7c7bb-6rqgn
+pod "nginx-6768d7c7bb-6rqgn" deleted from default namespace
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-6768d7c7bb-fhdht   1/1     Running   0          5s
+nginx-6768d7c7bb-gsz95   1/1     Running   0          63s
+nginx-6768d7c7bb-trzvp   1/1     Running   0          63s
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl apply -f deployment.yaml 
+deployment.apps/nginx configured
+
+ubuntu@ip-172-31-40-19:~/kubernetes$ kubectl get po
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-ff7cb4cdf-27f95   1/1     Running   0          15s
+nginx-ff7cb4cdf-7lcrj   1/1     Running   0          4s
+nginx-ff7cb4cdf-przks   1/1     Running   0          15s
