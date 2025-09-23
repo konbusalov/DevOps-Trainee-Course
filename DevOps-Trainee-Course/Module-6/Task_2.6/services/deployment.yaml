@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-task-deployment
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      task: services
+  template:
+    metadata:
+      labels:
+        task: services
+    spec:
+      containers:
+        - name: nginx-app
+          image: nginx:stable
+          ports:
+            - containerPort: 80
