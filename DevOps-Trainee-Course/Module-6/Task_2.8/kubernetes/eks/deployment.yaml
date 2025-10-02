@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-task-deployment
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      task: ingress
+  template:
+    metadata:
+      labels:
+        task: ingress
+    spec:
+      containers:
+        - name: nginx-app
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+              name: http
