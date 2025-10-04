@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: curl-api
+spec:
+  template:
+    spec:
+      containers:
+        - name: curl-api
+          image: ubuntu:latest
+          command: ["/bin/sh", "-c"]
+          args: ["apt-get update && apt-get install -y curl && curl https://swapi.dev/api/people/1/"]
+      restartPolicy: Never
