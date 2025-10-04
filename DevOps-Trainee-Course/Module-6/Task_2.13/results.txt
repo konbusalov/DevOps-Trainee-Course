@@ -1,0 +1,12 @@
+ kon   main  kubectl get po 
+NAME                           READY   STATUS      RESTARTS   AGE
+date-cron-job-29326555-bvlvk   0/1     Completed   0          6m10s
+date-cron-job-29326560-2bnt7   0/1     Completed   0          70s
+               
+ [~/Desktop/DevOps/DevOps-Trainee-Course/Module-6/Task_2.13]
+ kon   main  kubectl logs date-cron-job-29326555-bvlvk                            
+Sat Oct  4 15:55:04 UTC 2025
+               
+ [~/Desktop/DevOps/DevOps-Trainee-Course/Module-6/Task_2.13]
+ kon   main  kubectl logs date-cron-job-29326560-2bnt7
+Sat Oct  4 16:00:02 UTC 2025
