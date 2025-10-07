@@ -1,0 +1,15 @@
+kubectl get po
+NAME                           READY   STATUS              RESTARTS   AGE
+note-job-wlnq4                 0/1     Completed           0          88s
+volume-task-659546484c-7xjhs   0/1     ContainerCreating   0          10s
+volume-task-659546484c-m4w22   0/1     ContainerCreating   0          10s
+
+kubectl exec -it volume-task-659546484c-m4w22 -- /bin/bash
+root@volume-task-659546484c-m4w22:/# ls
+bin   docker-entrypoint.d   home   media  opt   run   sys  var
+boot  docker-entrypoint.sh  lib    mnt    proc  sbin  tmp
+dev   etc                   lib64  notes  root  srv   usr
+root@volume-task-659546484c-m4w22:/# cd notes
+root@volume-task-659546484c-m4w22:/notes# cat data.txt
+Hello World!
+root@volume-task-659546484c-m4w22:/notes# 

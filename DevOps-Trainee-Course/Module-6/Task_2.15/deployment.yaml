@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volume-task
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      task: volumes
+  template:
+    metadata:
+      name: volume-task
+      labels:
+        task: volumes
+    spec:
+      containers:
+        - name: volume-task
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /notes
+              name: notes-volume
+      volumes:
+        - name: notes-volume
+          persistentVolumeClaim:
+            claimName: my-pvc
+      
