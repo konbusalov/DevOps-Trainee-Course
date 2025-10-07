@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: volume-app
+spec:
+  template:
+    metadata:
+      labels:
+        task: volumes
+    spec:
+      containers:
+        - name: volume-app
+          image: busybox:stable
+          command: ['sh', '-c', 'cat /hello-world/data.txt']
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /hello-world
+              name: hello-world
+      volumes:
+        - name: hello-world
+          hostPath:
+            path: /etc/host-dir
+            type: Directory
+      restartPolicy: OnFailure
