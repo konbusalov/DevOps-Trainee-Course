@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      task: config-maps
+  template:
+    metadata:
+      labels:
+        task: config-maps
+    spec:
+      containers:
+        - name: my-app
+          image: nginx
+          # command: ["/bin/bash", "-c", "echo $GREETING > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"]
+          # env:
+          #   - name: GREETING 
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         key: greeting
+          #         name: my-config
+          command: ["/bin/bash", "-c", "GREETING=$(cat /configs/greeting) && echo $GREETING > /usr/share/nginx/html/index.html && nginx -g 'daemon off;'"]
+          volumeMounts:
+            - mountPath: /configs/
+              name: secret-volume
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: my-secret
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-nodeport
+spec:
+  selector:
+    task: config-maps
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+      protocol: TCP
+  type: NodePort 
+
+          
