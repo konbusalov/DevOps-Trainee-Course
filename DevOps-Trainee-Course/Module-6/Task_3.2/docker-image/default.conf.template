@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        default_type 'text/plain';
+
+        return 200 "This is my ${SECRET}"; 
+    }
+}
