@@ -1,0 +1,13 @@
+--------------------------Add Prometheus and Grafana Helm Charts-------------------------------
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add loki https://grafana.github.io/loki/charts
+-----------------------------------------------------------------------------------------------
+
+--------------------------Install Kube-Prom-Stack and Loki-Stack----------------------------------------------------------
+helm install kube-prom-stack prometheus-community/kube-prometheus-stack - namespace prometheus-grafana - create-namespace
+helm upgrade --install loki --namespace=prometheus-grafana grafana/loki-stack --set loki.image.tag=2.9.3
+--------------------------------------------------------------------------------------------------------------------------
+
+--------------------------Upgrade Kube-Prom-Stack with Custom values.yaml for AlertManager Configuration----------
+helm upgrade kube-prom-stack prometheus-community/kube-prometheus-stack -n prometheus-grafana --values values.yaml
+------------------------------------------------------------------------------------------------------------------

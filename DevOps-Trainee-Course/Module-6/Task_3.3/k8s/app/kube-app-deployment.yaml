@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-test-deployment
+  namespace: app
+  labels:
+    app: readiness-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: readiness-test
+  template:
+    metadata:
+      labels:
+        app: readiness-test
+    spec:
+      containers:
+      - name: readiness-container
+        image: busybox:1.36
+        command:
+        - /bin/sh
+        - -c
+        - "sleep 180; touch /tmp/ready; sleep 3600"
+        ports:
+        - containerPort: 80 
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/ready
+          initialDelaySeconds: 5
+          periodSeconds: 3
+
+            
+
+
+    

@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: alert-config-telegram
+  namespace: prometheus-grafana
+  labels:
+    release: prometheus-stack
+    alertmanagerConfig: alertmanager-telegram 
+spec:
+  route:
+    groupBy: ["alertname","job","namespace"] 
+    groupWait: 5s
+    groupInterval: 5m
+    repeatInterval: 1h
+    receiver: "telegram"
+    routes:
+    - receiver: "telegram"
+      matchers:
+        - name: severity
+          matchType: "=~"
+          value: "warning|critical"
+      continue: false
+  receivers:
+    - name: telegram
+      telegramConfigs:
+        - botToken:
+            name: telegram-bot-token-secret 
+            key: bot-token 
+          chatID: -4994373637
+          parseMode: 'MarkdownV2'
+          disableNotifications: false
+          sendResolved: true
