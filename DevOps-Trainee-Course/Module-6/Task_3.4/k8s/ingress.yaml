@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - antonkon.ddns.net
+    secretName: app-tls
+  rules:
+    - host: antonkon.ddns.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: random-app-service
+                port: 
+                  number: 80
+            pathType: Prefix
+            path: /
