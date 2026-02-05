@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kuber
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: development
+  source:
+    repoURL: 'https://github.com/bakavets/k8s-lessons.git'
+    targetRevision: master
+    path: lesson-30/dev/kuber
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: kuber
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
